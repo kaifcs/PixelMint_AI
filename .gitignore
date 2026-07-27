@@ -1,0 +1,96 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Build Output
+# =========================
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+
+# =========================
+# Environment Files
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# =========================
+# Runtime Files
+# =========================
+*.pid
+*.seed
+*.pid.lock
+
+# =========================
+# Vite
+# =========================
+vite.svg
+
+# =========================
+# Local Config
+# =========================
+*.local
+
+# =========================
+# IDE / Editors
+# =========================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Visual Studio
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Vim
+*.sw?
+*.swp
+
+# =========================
+# Temporary Files
+# =========================
+st.txt
+*.tmp
+*.temp
+
+# =========================
+# Cache
+# =========================
+.cache/
+.eslintcache
+.vscode
+
+# =========================
+# Package Managers
+# =========================
+bun.lockb
+
+# npm Workspaces
+.pnpm-store/
+.npm/
+
+# Testing
+playwright-report/
+test-results/
+
+# Optional OS files
+Desktop.ini

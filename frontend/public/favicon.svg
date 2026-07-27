@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="18" fill="#081120"/>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#bg)" stroke="rgba(125,211,252,0.22)"/>
+  <path d="M22 18H34.5C42.5081 18 49 24.4919 49 32.5C49 40.5081 42.5081 47 34.5 47H22V18Z" fill="#0B1730"/>
+  <path d="M22 18H33.5C41.5081 18 48 24.4919 48 32.5C48 40.5081 41.5081 47 33.5 47H22V18Z" fill="url(#shape)"/>
+  <path d="M22 25H33C37.4183 25 41 28.5817 41 33C41 37.4183 37.4183 41 33 41H28V35H32.2C34.4091 35 36.2 33.2091 36.2 31C36.2 28.7909 34.4091 27 32.2 27H28V47H22V25Z" fill="white"/>
+  <circle cx="45" cy="19" r="4" fill="#38BDF8"/>
+  <defs>
+    <linearGradient id="bg" x1="10" y1="8" x2="55" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1C35"/>
+      <stop offset="1" stop-color="#0A1223"/>
+    </linearGradient>
+    <linearGradient id="shape" x1="22" y1="18" x2="47.5" y2="44.5" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+</svg>
