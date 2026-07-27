@@ -203,7 +203,7 @@ const HeroSection = () => {
                 ) : null}
 
                 {uploader.remainingFreeQuota !== null ? (
-                  <p className="mt-4 text-sm text-slate-400">{uploader.remainingFreeQuota} free uploads remaining today</p>
+                  <p className="mt-4 text-sm text-slate-400">{uploader.remainingFreeQuota} uploads remaining today</p>
                 ) : null}
 
                 <div className="mt-8 flex flex-wrap justify-center gap-3">

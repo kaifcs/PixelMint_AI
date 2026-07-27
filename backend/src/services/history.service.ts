@@ -1,5 +1,6 @@
 import { supabaseAdmin } from "../config/supabase.js";
 import { AppError } from "../utils/AppError.js";
+import { env } from "../config/env.js";
 
 export const createHistoryRecordAtomic = async (params: {
   userId: string;
@@ -27,7 +28,7 @@ export const createHistoryRecordAtomic = async (params: {
   }
 
   if (data === "QUOTA_EXCEEDED") {
-    throw new AppError("Daily background removal limit exceeded.", 429);
+    throw new AppError("Daily limit reached. Upgrade or try again tomorrow.", 429);
   }
 };
 
@@ -41,10 +42,11 @@ export const createHistoryRecord = async (params: {
   plan?: string;
   limit?: number;
 }) => {
+  const plan = params.plan ?? "FREE";
   await createHistoryRecordAtomic({
     ...params,
-    plan: params.plan ?? "FREE",
-    limit: params.limit ?? 2,
+    plan,
+    limit: params.limit ?? (plan === "PRO" ? env.PRO_DAILY_LIMIT : env.FREE_DAILY_LIMIT),
   });
 };
 

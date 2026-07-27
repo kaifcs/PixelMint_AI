@@ -44,10 +44,9 @@ export const ProfilePage = () => {
 
   const plan = usageQuery.data?.plan ?? "FREE";
   const dailyUsed = usageQuery.data?.dailyUsed ?? 0;
-  const dailyLimit = usageQuery.data?.dailyLimit ?? 2;
+  const dailyLimit = usageQuery.data?.dailyLimit ?? (plan === "PRO" ? 3 : 2);
   const remaining = usageQuery.data?.remaining ?? Math.max(0, dailyLimit - dailyUsed);
-  const isUnlimited = plan === "PRO";
-  const progressPercent = isUnlimited ? 100 : Math.min(100, Math.round((dailyUsed / (dailyLimit || 1)) * 100));
+  const progressPercent = Math.min(100, Math.round((dailyUsed / (dailyLimit || 1)) * 100));
 
   const handlePasswordChange = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -164,15 +163,13 @@ export const ProfilePage = () => {
             <div className="flex justify-between items-end text-sm">
               <span className="text-slate-300 font-medium">Daily Credit Allowance</span>
               <span className="text-white font-bold">
-                {isUnlimited ? "Unlimited Quota" : `${dailyUsed} / ${dailyLimit} Credits Used`}
+                {`${dailyUsed} / ${dailyLimit} Credits Used`}
               </span>
             </div>
             <div className="w-full h-3 bg-black/40 rounded-full overflow-hidden p-0.5 border border-white/10">
               <div
                 className={`h-full rounded-full transition-all duration-500 ${
-                  isUnlimited
-                    ? "bg-gradient-to-r from-emerald-500 to-teal-400"
-                    : progressPercent > 80
+                  progressPercent > 80
                     ? "bg-gradient-to-r from-amber-500 to-red-500"
                     : "bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-500"
                 }`}
@@ -180,7 +177,7 @@ export const ProfilePage = () => {
               />
             </div>
             <p className="text-xs text-slate-400 flex items-center justify-between">
-              <span>{isUnlimited ? "Your account has zero rate limits or daily caps." : `${remaining} credits remaining for today.`}</span>
+              <span>{`${remaining} credits remaining for today.`}</span>
               <span className="text-slate-500">Resets every 24h at UTC 00:00</span>
             </p>
           </div>

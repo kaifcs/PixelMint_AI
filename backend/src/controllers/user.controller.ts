@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { AppError } from "../utils/AppError.js";
-import { getTodayUsageCount } from "../services/usage.service.js";
+import { getTodayUsageCount, getDailyLimitForPlan } from "../services/usage.service.js";
 import { getUserHistory } from "../services/history.service.js";
 import { env } from "../config/env.js";
 import { supabaseAdmin } from "../config/supabase.js";
@@ -24,14 +24,15 @@ export const getUsage = async (req: Request, res: Response) => {
   }
 
   const todayUsage = await getTodayUsageCount(req.user.id);
+  const limit = getDailyLimitForPlan(req.user.profile.plan);
 
   res.json({
     success: true,
     data: {
       plan: req.user.profile.plan,
       dailyUsed: todayUsage,
-      dailyLimit: req.user.profile.plan === "FREE" ? env.FREE_DAILY_LIMIT : null,
-      remaining: req.user.profile.plan === "FREE" ? Math.max(0, env.FREE_DAILY_LIMIT - todayUsage) : null,
+      dailyLimit: limit,
+      remaining: Math.max(0, limit - todayUsage),
     },
   });
 };

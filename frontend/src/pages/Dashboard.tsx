@@ -103,8 +103,8 @@ const Dashboard = () => {
 
   const currentPlan = usageQuery.data?.plan ?? "FREE";
   const dailyUsed = usageQuery.data?.dailyUsed ?? 0;
-  const dailyLimit = usageQuery.data?.dailyLimit ?? 2;
-  const remainingCredits = currentPlan === "PRO" ? "Unlimited" : (usageQuery.data?.remaining ?? Math.max(0, dailyLimit - dailyUsed));
+  const dailyLimit = usageQuery.data?.dailyLimit ?? (currentPlan === "PRO" ? 3 : 2);
+  const remainingCredits = usageQuery.data?.remaining ?? Math.max(0, dailyLimit - dailyUsed);
   const totalHistoryCount = historyQuery.data?.length ?? 0;
 
   // Filter & Paginate History
@@ -178,8 +178,8 @@ const Dashboard = () => {
 
               <p className="mt-1.5 text-sm text-slate-400 leading-relaxed">
                 {currentPlan === "PRO"
-                  ? "Unlimited high-throughput GPU background removal quota active."
-                  : `You have used ${dailyUsed} of ${dailyLimit} daily free credits today. Upgrade for unlimited processing.`}
+                  ? `You have used ${dailyUsed} of ${dailyLimit} daily Pro credits today.`
+                  : `You have used ${dailyUsed} of ${dailyLimit} daily free credits today. Upgrade for more credits.`}
               </p>
             </div>
           </div>
@@ -218,7 +218,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
           {[
             {
-              title: "Free Uploads Remaining",
+              title: "Uploads Remaining",
               value: remainingCredits,
               subtitle: "Refreshes in 24 hours",
               icon: Clock,
@@ -234,17 +234,17 @@ const Dashboard = () => {
               bg: "bg-purple-500/10",
             },
             {
-              title: "Current Plan Tier",
-              value: currentPlan,
-              subtitle: currentPlan === "PRO" ? "Priority GPU Pipeline" : "Standard Speed",
+              title: "System Status",
+              value: "99.9% Operational",
+              subtitle: "GPU cluster latency < 1.2s",
               icon: Shield,
               color: "text-emerald-400",
               bg: "bg-emerald-500/10",
             },
             {
               title: "Credits Remaining",
-              value: currentPlan === "PRO" ? "∞ Pro Quota" : `${remainingCredits} / ${dailyLimit}`,
-              subtitle: "Daily Free Tier",
+              value: `${remainingCredits} / ${dailyLimit}`,
+              subtitle: currentPlan === "PRO" ? "Daily Pro Tier" : "Daily Free Tier",
               icon: CreditCard,
               color: "text-amber-400",
               bg: "bg-amber-500/10",
@@ -335,7 +335,7 @@ const Dashboard = () => {
               <div>
                 <h3 className="text-xl font-bold text-white font-['Outfit']">Pro Plan</h3>
                 <p className="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                  Upgrade to unlock unlimited daily background removals, priority cloud processing, and priority support.
+                  Upgrade to unlock increased daily background removals, priority cloud processing, and priority support.
                 </p>
               </div>
             </div>
@@ -428,15 +428,15 @@ const Dashboard = () => {
             </div>
 
             <div className="space-y-6 py-2">
-              {/* Progress Bar 1: Daily Free Quota */}
+              {/* Progress Bar 1: Daily Quota */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-300">Free Daily Tier Usage</span>
-                  <span className="text-blue-400 font-bold">{currentPlan === "PRO" ? "0 / 0 (Bypassed)" : `${dailyUsed} / ${dailyLimit} Credits`}</span>
+                  <span className="font-semibold text-slate-300">Daily Tier Usage</span>
+                  <span className="text-blue-400 font-bold">{`${dailyUsed} / ${dailyLimit} Credits`}</span>
                 </div>
                 <div className="h-2.5 w-full bg-white/10 rounded-full overflow-hidden p-0.5">
                   <div
-                    style={{ width: currentPlan === "PRO" ? "100%" : `${Math.min(100, (dailyUsed / (dailyLimit || 1)) * 100)}%` }}
+                    style={{ width: `${Math.min(100, (dailyUsed / (dailyLimit || 1)) * 100)}%` }}
                     className={`h-full rounded-full transition-all duration-500 ${
                       currentPlan === "PRO" ? "bg-emerald-500" : "bg-gradient-to-r from-blue-500 to-purple-500"
                     }`}

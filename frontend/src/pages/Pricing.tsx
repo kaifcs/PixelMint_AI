@@ -16,7 +16,7 @@ const Pricing = () => {
             for Every Scale
           </h1>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
-            Start free with 2 daily credits. Scale up for unlimited commercial background removals with zero hidden fees.
+            Start free with 2 daily credits. Scale up for increased commercial background removals with zero hidden fees.
           </p>
         </div>
       </div>

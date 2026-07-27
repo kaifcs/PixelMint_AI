@@ -17,6 +17,7 @@ const envSchema = z.object({
   REMOVE_BG_API_KEY: z.string().min(1),
   REMOVE_BG_SIZE: z.string().default("auto"),
   FREE_DAILY_LIMIT: z.coerce.number().int().positive().default(2),
+  PRO_DAILY_LIMIT: z.coerce.number().int().positive().default(3),
   RAZORPAY_KEY_ID: z.string().min(1),
   RAZORPAY_KEY_SECRET: z.string().min(1),
   RAZORPAY_WEBHOOK_SECRET: z.string().min(1),

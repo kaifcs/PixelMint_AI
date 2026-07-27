@@ -19,8 +19,8 @@ const plans = [
     name: "Pro",
     price: "Rs 999",
     period: "/month",
-    description: "Unlimited power for designers and commercial studios",
-    features: ["Unlimited background removals", "High-quality PNG output", "Priority cloud processing", "High-volume studio support", "Ultra-fast neural processing", "Dedicated 24/7 priority support"],
+    description: "High power for designers and commercial studios",
+    features: ["More daily background removals", "High-quality PNG output", "Priority cloud processing", "High-volume studio support", "Ultra-fast neural processing", "Dedicated 24/7 priority support"],
     cta: "Upgrade to Pro",
     highlighted: true,
   },
@@ -55,7 +55,7 @@ const PricingSection = () => {
             </span>
           </h2>
           <p className="text-slate-400 max-w-xl mx-auto text-base sm:text-lg">
-            Start free with 2 daily credits. Upgrade anytime for unlimited studio processing or pay-as-you-go credits.
+            Start free with 2 daily credits. Upgrade anytime for 3 daily Pro credits or pay-as-you-go credits.
           </p>
         </div>
 

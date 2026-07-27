@@ -87,7 +87,7 @@ export const useProCheckout = () => {
         amount: razorpayOrder.amount,
         currency: razorpayOrder.currency,
         name: "PixelMint AI",
-        description: "Pro Subscription (Unlimited Images)",
+        description: "Pro Subscription (Increased Daily Limits)",
         order_id: razorpayOrder.id,
         prefill: {
           email: user?.email ?? undefined,
