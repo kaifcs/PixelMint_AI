@@ -61,6 +61,19 @@ export const apiClient = {
 
     return schema.parse(await response.json());
   },
+  async delete<T>(path: string, schema: { parse: (data: unknown) => T }, options?: { token?: string; signal?: AbortSignal }): Promise<T> {
+    const response = await fetch(withBaseUrl(path), {
+      method: "DELETE",
+      headers: options?.token ? { Authorization: `Bearer ${options.token}` } : undefined,
+      signal: options?.signal,
+    });
+
+    if (!response.ok) {
+      return parseError(response);
+    }
+
+    return schema.parse(await response.json());
+  },
   async postFormData<T>(
     path: string,
     formData: FormData,

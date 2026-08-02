@@ -68,3 +68,38 @@ export const getUserHistory = async (userId: string) => {
 
   return data ?? [];
 };
+
+export const getOwnedHistoryRecord = async (userId: string, imageId: string) => {
+  const { data, error } = await supabaseAdmin
+    .from("processed_images")
+    .select("id, original_public_id, processed_public_id")
+    .eq("id", imageId)
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    throw new AppError("Failed to fetch image record.", 500, error.message);
+  }
+
+  if (!data) {
+    throw new AppError("Image not found.", 404);
+  }
+
+  return data as {
+    id: string;
+    original_public_id: string | null;
+    processed_public_id: string | null;
+  };
+};
+
+export const deleteHistoryRow = async (userId: string, imageId: string) => {
+  const { error } = await supabaseAdmin
+    .from("processed_images")
+    .delete()
+    .eq("id", imageId)
+    .eq("user_id", userId);
+
+  if (error) {
+    throw new AppError("Failed to delete image record.", 500, error.message);
+  }
+};

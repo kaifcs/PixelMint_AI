@@ -9,11 +9,11 @@ const contactSchema = z.object({
   name: z.string().optional(),
   firstname: z.string().optional(),
   lastname: z.string().optional(),
-  email: z.string().email("Please provide a valid email address."),
+  email: z.string({ required_error: "Email is required." }).email("Please provide a valid email address."),
   subject: z.string().optional(),
   countrycode: z.string().optional(),
   phoneNo: z.string().optional(),
-  message: z.string().min(1, "Message is required."),
+  message: z.string({ required_error: "Message is required." }).min(1, "Message is required."),
 });
 
 const escapeHtml = (str: string): string => {

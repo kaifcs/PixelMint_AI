@@ -33,7 +33,7 @@ import { downloadImage } from "@/utils/downloadImage";
 import { useAuth } from "@/features/auth/auth-context";
 import { useProCheckout } from "@/features/billing/useProCheckout";
 import { apiClient } from "@/services/api/client";
-import { userHistorySchema, userUsageSchema } from "@/services/api/schemas";
+import { deleteHistoryItemResponseSchema, userHistorySchema, userUsageSchema } from "@/services/api/schemas";
 
 const Dashboard = () => {
   const { authEnabled, getAccessToken, user } = useAuth();
@@ -125,9 +125,20 @@ const Dashboard = () => {
     return filteredHistory.slice(start, start + itemsPerPage);
   }, [filteredHistory, currentPage, itemsPerPage]);
 
-  const handleDeleteItem = (id: string, filename: string) => {
-    setDeletedIds((prev) => [...prev, id]);
-    toast.success(`Removed "${filename}" from archive history.`);
+  const handleDeleteItem = async (id: string, filename: string) => {
+    const token = await getAccessToken();
+    if (!token) {
+      toast.error("Please sign in to delete this asset.");
+      return;
+    }
+
+    try {
+      await apiClient.delete(`/api/history/${id}`, deleteHistoryItemResponseSchema, { token });
+      setDeletedIds((prev) => [...prev, id]);
+      toast.success(`Removed "${filename}" from archive history.`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to delete asset.");
+    }
   };
 
   // Mock weekly data for visual analytics
@@ -664,7 +675,7 @@ const Dashboard = () => {
                               type="button"
                               variant="ghost"
                               size="sm"
-                              onClick={() => handleDeleteItem(item.id, item.source_filename)}
+                              onClick={() => void handleDeleteItem(item.id, item.source_filename)}
                               title="Delete Asset"
                               aria-label="Delete Asset"
                               className="h-8 w-8 p-0 rounded-lg text-slate-500 hover:text-red-400 hover:bg-red-500/10"
@@ -744,7 +755,7 @@ const Dashboard = () => {
                         type="button"
                         size="sm"
                         variant="ghost"
-                        onClick={() => handleDeleteItem(item.id, item.source_filename)}
+                        onClick={() => void handleDeleteItem(item.id, item.source_filename)}
                         className="text-xs text-slate-500 hover:text-red-400 hover:bg-red-500/10 p-1.5 h-auto rounded-lg"
                         title="Delete Asset"
                         aria-label="Delete Asset"

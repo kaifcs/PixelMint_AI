@@ -8,7 +8,7 @@ const Privacy = () => (
         {[
           { title: "Information We Collect", content: "We collect information you provide when creating an account (email, name) and images you upload for processing. We also collect usage data including IP address, browser type, and interaction patterns." },
           { title: "How We Use Your Information", content: "Your information is used to provide our background removal service, process payments, improve our AI models (anonymized data only), and communicate service updates." },
-          { title: "Image Data", content: "Uploaded images are processed in real-time and automatically deleted within 24 hours. We do not permanently store your images or use them for any purpose beyond providing the requested service." },
+          { title: "Image Data", content: "Uploaded images are processed in real-time and automatically deleted after 30 days. We do not permanently store your images or use them for any purpose beyond providing the requested service." },
           { title: "Data Security", content: "We implement industry-standard encryption (TLS 1.3) for data in transit and AES-256 for data at rest. Access to user data is strictly limited to authorized personnel." },
           { title: "Third-Party Services", content: "We use Razorpay for payment processing and Cloudinary for temporary image storage. These services have their own privacy policies." },
           { title: "Your Rights", content: `You can request access to, correction of, or deletion of your personal data at any time by contacting support@pixelmintai.com.` },

@@ -24,7 +24,7 @@ const comparisonData = [
   },
   {
     feature: "Commercial Security & Privacy",
-    pixelmint: "256-bit TLS & automated 24-hour asset purging",
+    pixelmint: "256-bit TLS & automated 30-day asset purging",
     traditional: "Local file storage & manual cleanup",
     genericAi: "Images retained for model training",
     icon: Shield,

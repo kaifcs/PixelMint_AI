@@ -111,8 +111,8 @@ const Signup = () => {
               },
               {
                 icon: Shield,
-                title: "Secure Authentication & Zero Storage",
-                desc: "Studio-grade architecture with automatic 24-hour asset purging for maximum privacy.",
+                title: "Secure Authentication & Limited Storage",
+                desc: "Studio-grade architecture with automatic 30-day asset purging for maximum privacy.",
               },
             ].map((item) => (
               <div key={item.title} className="flex items-start gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.12] transition-colors">

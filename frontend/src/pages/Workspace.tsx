@@ -175,7 +175,7 @@ export const WorkspacePage = () => {
                 </div>
                 <div className="pt-2 flex items-center gap-4 text-xs text-slate-500 font-medium">
                   <span className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-400" /> 100% Automatic</span>
-                  <span className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-400" /> Zero Data Retention</span>
+                  <span className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-400" /> 30-Day Auto-Delete</span>
                   <span className="flex items-center gap-1.5"><Check className="w-3.5 h-3.5 text-emerald-400" /> HD Quality</span>
                 </div>
               </div>

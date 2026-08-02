@@ -77,3 +77,8 @@ export const contactResponseSchema = z.object({
 });
 
 export type ContactResponse = z.infer<typeof contactResponseSchema>;
+
+export const deleteHistoryItemResponseSchema = z.object({
+  success: z.literal(true),
+  message: z.string(),
+});

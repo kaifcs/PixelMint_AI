@@ -22,7 +22,7 @@ const features = [
   {
     icon: Shield,
     title: "Automated Data Purging",
-    description: "All uploads are encrypted via 256-bit TLS and permanently deleted within 24 hours. Minimal data retention.",
+    description: "All uploads are encrypted via 256-bit TLS and permanently deleted after 30 days. Minimal data retention.",
     badge: "SECURE",
   },
   {

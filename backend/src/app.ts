@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import paymentWebhookRoutes from "./routes/paymentWebhook.routes.js";
 import healthRoutes from "./routes/health.routes.js";
 import imageRoutes from "./routes/image.routes.js";
@@ -14,6 +15,8 @@ import { attachRequestContext } from "./middlewares/requestContext.middleware.js
 
 export const createApp = () => {
   const app = express();
+
+  app.use(helmet());
 
   app.use(
     cors({

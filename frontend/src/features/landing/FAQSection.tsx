@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "What happens to my uploaded images and data privacy?",
     answer:
-      "We adhere to strict commercial security standards. All asset transfers are encrypted with 256-bit TLS. For complete data privacy, uploaded images and processed cutouts are automatically purged from our servers after 24 hours. We never use your customer data to train public AI models.",
+      "We adhere to strict commercial security standards. All asset transfers are encrypted with 256-bit TLS. For complete data privacy, uploaded images and processed cutouts are automatically purged from our servers after 30 days. We never use your customer data to train public AI models.",
   },
   {
     question: "Can I cancel or change my Pro subscription anytime?",

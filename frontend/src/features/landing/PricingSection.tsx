@@ -11,7 +11,7 @@ const plans = [
     price: "Rs 0",
     period: "forever",
     description: "Get started with high-resolution background removal",
-    features: ["2 free images per day", "Standard HD quality", "JPG, PNG, WEBP ingestion", "Auto-delete after 24 hours", "Community support"],
+    features: ["2 free images per day", "Standard HD quality", "JPG, PNG, WEBP ingestion", "Auto-delete after 30 days", "Community support"],
     cta: "Get Started Free",
     highlighted: false,
   },

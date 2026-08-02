@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import { AppError } from "../utils/AppError.js";
 import { getTodayUsageCount, getDailyLimitForPlan } from "../services/usage.service.js";
-import { getUserHistory } from "../services/history.service.js";
+import { getUserHistory, getOwnedHistoryRecord, deleteHistoryRow } from "../services/history.service.js";
 import { env } from "../config/env.js";
 import { supabaseAdmin } from "../config/supabase.js";
 import { destroyCloudinaryAsset } from "../services/cloudinary.service.js";
@@ -47,6 +47,55 @@ export const getHistory = async (req: Request, res: Response) => {
   res.json({
     success: true,
     data: history,
+  });
+};
+
+export const deleteHistoryItem = async (req: Request, res: Response) => {
+  if (!req.user) {
+    throw new AppError("Unauthorized", 401);
+  }
+
+  const { id } = req.params;
+
+  if (!id || typeof id !== "string") {
+    throw new AppError("Image id is required.", 400);
+  }
+
+  const record = await getOwnedHistoryRecord(req.user.id, id);
+
+  if (record.original_public_id) {
+    try {
+      await destroyCloudinaryAsset(record.original_public_id);
+    } catch (err) {
+      logger.warn("history_deletion.cloudinary_failed", {
+        userId: req.user.id,
+        imageId: id,
+        asset: "original",
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  if (record.processed_public_id) {
+    try {
+      await destroyCloudinaryAsset(record.processed_public_id);
+    } catch (err) {
+      logger.warn("history_deletion.cloudinary_failed", {
+        userId: req.user.id,
+        imageId: id,
+        asset: "processed",
+        error: err instanceof Error ? err.message : String(err),
+      });
+    }
+  }
+
+  await deleteHistoryRow(req.user.id, id);
+
+  logger.info("history_deletion.success", { userId: req.user.id, imageId: id });
+
+  res.json({
+    success: true,
+    message: "Image deleted successfully.",
   });
 };
 

@@ -111,7 +111,7 @@ const Login = () => {
               {
                 icon: Shield,
                 title: "Studio Grade Privacy",
-                desc: "256-bit TLS encryption with automated 24-hour asset purging. Zero data retention.",
+                desc: "256-bit TLS encryption with automated 30-day asset purging. Limited data retention.",
               },
               {
                 icon: Sparkles,
