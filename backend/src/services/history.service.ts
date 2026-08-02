@@ -4,7 +4,6 @@ import { env } from "../config/env.js";
 
 export const createHistoryRecordAtomic = async (params: {
   userId: string;
-  plan: string;
   limit: number;
   originalImageUrl: string;
   originalPublicId: string;
@@ -14,7 +13,6 @@ export const createHistoryRecordAtomic = async (params: {
 }) => {
   const { data, error } = await supabaseAdmin.rpc("check_and_record_image_processing_atomic", {
     p_user_id: params.userId,
-    p_plan: params.plan,
     p_limit: params.limit,
     p_original_url: params.originalImageUrl,
     p_original_public_id: params.originalPublicId,
@@ -43,10 +41,16 @@ export const createHistoryRecord = async (params: {
   limit?: number;
 }) => {
   const plan = params.plan ?? "FREE";
+  const limit = params.limit ?? (plan === "PRO" ? env.PRO_DAILY_LIMIT : env.FREE_DAILY_LIMIT);
+
   await createHistoryRecordAtomic({
-    ...params,
-    plan,
-    limit: params.limit ?? (plan === "PRO" ? env.PRO_DAILY_LIMIT : env.FREE_DAILY_LIMIT),
+    userId: params.userId,
+    limit,
+    originalImageUrl: params.originalImageUrl,
+    originalPublicId: params.originalPublicId,
+    processedImageUrl: params.processedImageUrl,
+    processedPublicId: params.processedPublicId,
+    sourceFilename: params.sourceFilename,
   });
 };
 
